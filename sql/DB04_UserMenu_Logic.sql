@@ -56,9 +56,10 @@ SELECT
     p.platform_name, 
     c.title, 
     pc.platform_rating
-FROM Users ubook
+FROM Users u
 JOIN UserSubscription us ON u.user_id = us.user_id
 JOIN Platform p ON us.platform_id = p.platform_id
 JOIN PlatformContent pc ON p.platform_id = pc.platform_id
 JOIN Content c ON pc.content_id = c.content_id
-WHERE u.user_id = 1;
+WHERE u.user_id = 1 and pc.platform_rating>3.5
+ORDER BY p.platform_name ASC, pc.platform_rating DESC;
