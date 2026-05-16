@@ -1,6 +1,7 @@
 -- View 생성 코드1 [콘텐츠 검색 및 조회] >> (5. 콘텐츠 상세 정보 조회)
 CREATE VIEW v_content_detail AS
 SELECT 
+    c.content_id,
     c.title AS '제목',
     c.content_type AS '유형',
     g.genre_name AS '장르',
