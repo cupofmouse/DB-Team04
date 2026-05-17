@@ -10,9 +10,21 @@ GROUP BY c.title
 ORDER BY view_count DESC;
 
 -- 2. 높은 평점 콘텐츠 조회
+SELECT
+    c.title AS '콘텐츠제목',
+    ROUND(AVG(r.rating), 2) AS '평균평점',
+    COUNT(r.review_id) AS '리뷰수'
+FROM Review r
+JOIN PlatformContent pc
+    ON r.pc_id = pc.pc_id
+JOIN Content c
+    ON pc.content_id = c.content_id
+GROUP BY c.content_id, c.title
+HAVING AVG(r.rating) >= 4.0
+ORDER BY AVG(r.rating) DESC, COUNT(r.review_id) DESC;
 
 -- 3. 내가 본 장르 기반 추천
--- JOIN 쿼리용 [인기 콘텐츠 및 추천 조회] >> (3. 내가 본 장르 기반 추천) 다만 user_id=1임을 가정함.
+-- JOIN 쿼리용 [인기 콘텐츠 및 추천 조회] >> (3. 내가 본 장르 기반 추천)
 -- 동적쿼리가 될 예정
 SELECT DISTINCT c.title, g.genre_name
 FROM Content c
@@ -30,7 +42,7 @@ LIMIT 5;
 
 -- 4. 플랫폼별 추천 콘텐츠 조회
 -- [인기 콘텐츠 및 추천 조회] > (4. 플랫폼별 추천 콘텐츠 조회)
--- 특정 유저(user_id = 1)가 구독 중인 플랫폼의 콘텐츠만 조회 >> 동적쿼리가 될 예정
+-- 특정 유저가 구독 중인 플랫폼의 콘텐츠만 조회 >> 동적쿼리가 될 예정
 SELECT 
     u.username, 
     p.platform_name, 

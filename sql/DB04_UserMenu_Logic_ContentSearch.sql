@@ -11,15 +11,15 @@ ORDER BY 제목 ASC;
 
 -- 2. 장르별 콘텐츠 검색
 SELECT * FROM v_content_detail 
-WHERE 장르 = ? 
-ORDER BY 평점 DESC;
+WHERE 장르 = ?
+ORDER BY 플랫폼평점 DESC;
 
 -- 자바 포인트: pstmt.setString(1, selectedGenre);
 
 
 -- 3. 콘텐츠 유형별 검색 (영화/드라마/예능/애니 등)
-SELECT * FROM v_content_dev_content_detailv_content_detailtail 
-WHERE 유형 = ? 
+SELECT * FROM v_content_detail
+WHERE 유형 = ?
 ORDER BY 제목 ASC;
 
 -- 자바 포인트: pstmt.setString(1, typeName);
@@ -28,7 +28,7 @@ ORDER BY 제목 ASC;
 -- 4. 플랫폼별 콘텐츠 조회
 SELECT * FROM v_content_detail 
 WHERE 플랫폼 = ? 
-ORDER BY 평점 DESC;
+ORDER BY 플랫폼평점 DESC;
 
 -- 자바 포인트: pstmt.setString(1, platformName);
 
